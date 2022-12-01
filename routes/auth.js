@@ -8,12 +8,8 @@ app.post('/login', async(req,res)=>{
 
     const {Email,Password} =req.body
 
-    console.log(Email);
-
     const user = await Users.findOne({
-        where: {
-            Email
-        }
+        Email
     })
 
 
@@ -21,7 +17,6 @@ app.post('/login', async(req,res)=>{
         res.status(404).send('User Not Found')
     }else{
 
-        console.log(user);
         const validPassword = await bcrypt.compare(Password, user.Password)
 
         if (validPassword) {
