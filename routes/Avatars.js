@@ -31,11 +31,11 @@ app.post('/:id', async (req,res)=>{
 app.put('/:id', async (req,res)=>{
     const {Form} = req.body
     const _id = mongoose.Types.ObjectId(req.params);
-    const newAvatar = await Avatars.updateOne(
+    await Avatars.updateOne(
         {_id}, {Form}
     )
 
-    res.json(newAvatar)
+    res.status(200).json('ok')
 })
 
 module.exports = app
