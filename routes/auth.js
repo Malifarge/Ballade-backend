@@ -20,7 +20,7 @@ app.post('/login', async(req,res)=>{
         const validPassword = await bcrypt.compare(Password, user.Password)
 
         if (validPassword) {
-            const token = issueToken({_id: user._id,Pseudo: user.Pseudo, Email: user.Email, Role: user.Role})
+            const token = issueToken({_id: user._id, Email: user.Email})
 
             res.json({
                 token

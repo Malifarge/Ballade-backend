@@ -6,6 +6,7 @@ const port = 5000
 const session = require('express-session')
 const authRoutes= require('./routes/auth')
 const UsersRoutes = require('./routes/Users')
+const AvatarsRoutes = require('./routes/Avatars')
 
 require('./config/passport')
 require('./models')
@@ -21,6 +22,7 @@ app.use(session({
 
 app.use('/auth',authRoutes)
 app.use('/Users',UsersRoutes)
+app.use('/Avatars',AvatarsRoutes)
 
 app.listen(port,()=>{
     console.log(`Server running on ${port}`);

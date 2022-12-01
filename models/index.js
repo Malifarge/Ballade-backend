@@ -3,6 +3,8 @@ require("dotenv").config()
 const mongoose = require('mongoose')
 
 require('./Users')
+require('./Avatars')
+
 
 const connectDb = () =>{
     
