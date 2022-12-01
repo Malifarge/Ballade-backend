@@ -1,5 +1,7 @@
 const express = require("express");
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const { checkIfAvatarExist } = require("../middleware/Avatars");
+const { checkIfUserExist } = require("../middleware/User");
 const Avatars = require("../models/Avatars");
 const app = express()
 
@@ -8,8 +10,8 @@ app.get('/', async (req,res)=>{
     res.json(avatars)
 })
 
-app.get('/:id', async (req,res)=>{
-    const _id = mongoose.Types.ObjectId(req.params);
+app.get('/:id',checkIfAvatarExist, async (req,res)=>{
+    const {_id} = req
     const avatar = await Avatars.findOne({
         _id
     })
@@ -17,9 +19,9 @@ app.get('/:id', async (req,res)=>{
     res.json(avatar)
 })
 
-app.post('/:id', async (req,res)=>{
+app.post('/:id',checkIfUserExist, async (req,res)=>{
     const {Form} = req.body
-    const user_id = mongoose.Types.ObjectId(req.params);
+    const user_id = req._id
     const avatar = await Avatars.create({
         Form,
         user_id
@@ -28,9 +30,9 @@ app.post('/:id', async (req,res)=>{
     res.json(avatar)
 })
 
-app.put('/:id', async (req,res)=>{
+app.put('/:id',checkIfAvatarExist, async (req,res)=>{
     const {Form} = req.body
-    const _id = mongoose.Types.ObjectId(req.params);
+    const {_id} = req
     await Avatars.updateOne(
         {_id}, {Form}
     )
