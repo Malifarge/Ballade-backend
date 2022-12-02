@@ -3,7 +3,7 @@ const app = express()
 const passport = require("../config/passport")
 const Users = require("../models/Users")
 const Avatars = require("../models/Avatars")
-const Museum = require("../models/Museum")
+const Museum = require("../models/Museums")
 const {checkIfUserExist} = require("../middleware/User")
 
 app.get('/me',passport.authenticate('jwt'), (req,res)=>{

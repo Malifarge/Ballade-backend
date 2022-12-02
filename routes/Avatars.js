@@ -10,11 +10,7 @@ app.get('/', async (req,res)=>{
 })
 
 app.get('/:id',checkIfAvatarExist, async (req,res)=>{
-    const {_id} = req
-    const avatar = await Avatars.findOne({
-        _id
-    })
-
+    const {avatar} = req
     res.json(avatar)
 })
 

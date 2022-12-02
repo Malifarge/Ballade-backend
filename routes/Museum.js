@@ -1,20 +1,16 @@
 const express = require('express')
 const { checkIfMuseumExist } = require('../middleware/Museum')
 const { checkIfUserExist } = require('../middleware/User')
-const Museum = require('../models/Museum')
+const Museums = require('../models/Museums')
 const app = express()
 
 app.get('/', async (req,res)=>{
-    const museum = await Museum.find()
+    const museum = await Museums.find()
     res.json(museum)
 })
 
 app.get('/:id',checkIfMuseumExist, async (req,res)=>{
-    const {_id} = req
-    const museum = await Museum.findOne({
-        _id
-    })
-
+    const {museum} = req
     res.json(museum)
 })
 
@@ -34,7 +30,7 @@ app.post('/:id',checkIfUserExist, async (req,res)=>{
 app.put('/:id',checkIfMuseumExist, async (req,res)=>{
     const {Description} = req.body
     const {_id} = req
-    await Museum.updateOne(
+    await Museums.updateOne(
         {_id}, {Description}
     )
 
@@ -43,7 +39,7 @@ app.put('/:id',checkIfMuseumExist, async (req,res)=>{
 
 app.delete('/:id',checkIfMuseumExist, async (req,res)=>{
     const _id = req._id
-    await Museum.deleteOne(
+    await Museums.deleteOne(
         {_id}
     )
 })

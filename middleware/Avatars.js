@@ -7,6 +7,7 @@ const checkIfAvatarExist = async (req,res,next) =>{
         const avatar = await Avatars.findOne({_id})
         if (avatar){
             req._id = _id
+            req.avatar = avatar
             next()
         }else{
             res.status(404).json("Avatar not found")
@@ -14,6 +15,7 @@ const checkIfAvatarExist = async (req,res,next) =>{
     }
     catch(e){
         res.status('404').json("invalid Id")
+        console.log(e);
     }
 
 }
