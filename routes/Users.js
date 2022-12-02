@@ -3,6 +3,7 @@ const app = express()
 const passport = require("../config/passport")
 const Users = require("../models/Users")
 const Avatars = require("../models/Avatars")
+const Museum = require("../models/Museum")
 const {checkIfUserExist} = require("../middleware/User")
 
 app.get('/me',passport.authenticate('jwt'), (req,res)=>{
@@ -31,6 +32,10 @@ app.delete('/:id',checkIfUserExist, async (req,res)=>{
     )
     
     await Avatars.deleteOne({
+        user_id: _id
+    })
+
+    await Museum.deleteOne({
         user_id: _id
     })
 

@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const { checkIfAvatarExist } = require("../middleware/Avatars");
 const { checkIfUserExist } = require("../middleware/User");
 const Avatars = require("../models/Avatars");
