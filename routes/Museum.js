@@ -38,7 +38,7 @@ app.put('/:id',checkIfMuseumExist, async (req,res)=>{
 })
 
 app.delete('/:id',checkIfMuseumExist, async (req,res)=>{
-    const _id = req._id
+    const {_id} = req
     await Museums.deleteOne(
         {_id}
     )

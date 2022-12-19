@@ -29,4 +29,21 @@ const { checkIfZoneExist } = require('../middleware/Zones')
     res.json(zone)
  })
 
+ app.put('/:id',checkIfZoneExist, async (req,res)=>{
+   const {Form,Description} = req.body
+   const {_id} = req
+   await Zones.updateOne(
+   {_id},{Description,Form}
+   )
+
+   res.status(200).json('ok')
+ })
+
+ app.delete('/:id',checkIfZoneExist, async(req,res)=>{
+   const {_id} = req
+   await Zones.deleteOne(
+      {_id}
+   )
+ })
+
  module.exports = app

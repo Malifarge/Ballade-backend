@@ -7,7 +7,8 @@ const session = require('express-session')
 const authRoutes= require('./routes/auth')
 const UsersRoutes = require('./routes/Users')
 const AvatarsRoutes = require('./routes/Avatars')
-const MuseumRoutes = require('./routes/Museum')
+const MuseumsRoutes = require('./routes/Museum')
+const ZonesRoutes = require('./routes/Zones')
 
 require('./config/passport')
 require('./models')
@@ -24,7 +25,8 @@ app.use(session({
 app.use('/auth',authRoutes)
 app.use('/users',UsersRoutes)
 app.use('/avatars',AvatarsRoutes)
-app.use('/museum',AvatarsRoutes)
+app.use('/museums',MuseumsRoutes)
+app.use('/zones',ZonesRoutes)
 
 app.listen(port,()=>{
     console.log(`Server running on ${port}`);

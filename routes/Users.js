@@ -3,6 +3,7 @@ const app = express()
 const passport = require("../config/passport")
 const Users = require("../models/Users")
 const Avatars = require("../models/Avatars")
+const Zones = require("../models/Zones")
 const Museum = require("../models/Museums")
 const {checkIfUserExist} = require("../middleware/User")
 
@@ -26,7 +27,7 @@ app.put('/:id',checkIfUserExist, async (req,res)=>{
 })
 
 app.delete('/:id',checkIfUserExist, async (req,res)=>{
-    const _id = req._id
+    const {_id} = req
     await Users.deleteOne(
         {_id}
     )
@@ -35,7 +36,11 @@ app.delete('/:id',checkIfUserExist, async (req,res)=>{
         user_id: _id
     })
 
-    await Museum.deleteOne({
+    await Museum.deleteMany({
+        user_id: _id
+    })
+
+    await Zones.deleteMany({
         user_id: _id
     })
 
